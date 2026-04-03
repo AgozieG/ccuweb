@@ -177,20 +177,103 @@
                     transform: translateX(-100%);
                 }
             }
+
+            /* Carousel Background Styles */
+            .banner-hny-info {
+                position: relative !important;
+                background: none !important;
+                min-height: 500px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .banner-carousel-container {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                z-index: 0;
+            }
+
+            .carousel-slide {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background-size: cover;
+                background-position: center;
+                opacity: 0;
+                transition: opacity 1s ease-in-out;
+            }
+
+            .carousel-slide.active {
+                opacity: 1;
+            }
+
+            .carousel-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.7);
+                z-index: 1;
+            }
+
+            .banner-content-wrapper {
+                position: relative;
+                z-index: 2;
+                width: 100%;
+            }
         </style>
 
         <!-- banner slider -->
         <div class="banner-hny-info text-center">
-            <h4 class="conference-title">Faculty of Allied Health and Applied Sciences (FAHAS),<br> Coal City University, Enugu, Nigeria</h4>
-            <h3>ETMIS 2025</h3>
-            <h4 class="conference-title">International Conference on Emerging Technologies for Multidisciplinary Innovation and Sustainability<br></h4>
-            <h4 class="conference-date">In-person and Online (Hybrid Mode)</h4>
-            <h4 class="conference-date">December 4-5, 2025</h4>
-            <h4 class="conference-date">Technically Supported by</h4>
-            <h4 class="conference-organizer">MG Aricent Educational Foundation</h4>
-            <a href="https://cmt3.research.microsoft.com/ETMIS2025" target="_blank" class="btn btn-primary rounded-pill shadow-sm px-3 py-1 fs-6 d-inline-block d-md-inline-block">Submit Paper</a>
+            <!-- Carousel Background Container -->
+            <div class="banner-carousel-container">
+                <div class="carousel-slide active" id="slide-0" style="background-image: url('images/ccuimg.jpg');"></div>
+                <div class="carousel-slide" id="slide-1" style="background-image: url('images/ccuimg2.jpg');"></div>
+                <div class="carousel-slide" id="slide-2" style="background-image: url('images/ccuimg3.webp');"></div>
+                <div class="carousel-overlay"></div>
+            </div>
+
+            <!-- Banner Content -->
+            <div class="banner-content-wrapper">
+                <h4 class="conference-title">Faculty of Allied Health and Applied Sciences (FAHAS),<br> Coal City University, Enugu, Nigeria</h4>
+                <h3>ETMIS 2025</h3>
+                <h4 class="conference-title">International Conference on Emerging Technologies for Multidisciplinary Innovation and Sustainability<br></h4>
+                <h4 class="conference-date">In-person and Online (Hybrid Mode)</h4>
+                <h4 class="conference-date">December 4-5, 2025</h4>
+                <h4 class="conference-date">Technically Supported by</h4>
+                <h4 class="conference-organizer">MG Aricent Educational Foundation</h4>
+                <a href="https://cmt3.research.microsoft.com/ETMIS2025" target="_blank" class="btn btn-primary rounded-pill shadow-sm px-3 py-1 fs-6 d-inline-block d-md-inline-block">Submit Paper</a>
+            </div>
         </div>
         <!-- //banner slider -->
+
+        <script>
+            // Infinite Carousel Functionality
+            (function() {
+                let currentSlide = 0;
+                const slides = document.querySelectorAll('.carousel-slide');
+                const totalSlides = slides.length;
+
+                function showSlide(n) {
+                    slides.forEach(slide => slide.classList.remove('active'));
+                    slides[n].classList.add('active');
+                }
+
+                function nextSlide() {
+                    currentSlide = (currentSlide + 1) % totalSlides;
+                    showSlide(currentSlide);
+                }
+
+                // Change slide every 5 seconds
+                setInterval(nextSlide, 5000);
+            })();
+        </script>
     </div>
     <!-- //banner -->
 
